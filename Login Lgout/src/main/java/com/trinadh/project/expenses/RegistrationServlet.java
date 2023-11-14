@@ -21,12 +21,12 @@ public class RegistrationServlet extends HttpServlet{
 		
 		Connection con = DB.DBConfig();
 		
-		String sql = "insert into login (username, password, confirmpassword) values (?, ?, ?)";
+		String sql = "insert into login (UserName, UserPassword, ConfirmPassword) values (?, ?, ?)";
 		
 		try {
 			PreparedStatement pst = con.prepareStatement(sql);
 			String username = req.getParameter("UserName");
-			String password = req.getParameter("Password");
+			String password = req.getParameter("UserPassword");
 			String confirmpassword = req.getParameter("ConfirmPassword");
 			
 			pst.setString(1, username);
