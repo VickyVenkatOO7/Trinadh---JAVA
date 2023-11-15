@@ -36,6 +36,7 @@ public class LoginServlet extends HttpServlet{
 			ResultSet rs = pst.executeQuery();
 			
 			PrintWriter out = resp.getWriter();
+			
 			if (rs.next()) {
 				HttpSession session = req.getSession();
 				session.setAttribute("username", username);
