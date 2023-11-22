@@ -5,6 +5,7 @@
 <title>Homepage</title>
 </head>
 <body>
+	<form action="ExpenseInsertionServlet" method="get">
 		<table>
 			<tr>
 				<td>Expense Date :</td>
@@ -13,7 +14,7 @@
 			<tr>
 				<td>Expense Category :</td>
 				<td>
-					<select name="Expense Category">
+					<select name="ExpenseCategory">
 						<option>Food</option>
 						<option>Travels & Fuel</option>
 						<option>Households & Grocery</option>
@@ -39,6 +40,7 @@
 			<tr>
 				<td colspan="2" align="center"><input type="submit" name="Submit" value="Add Expense"/></td>
 			</tr>
+			</form>
 			<form action="LogoutServlet">
 				<tr>
 					<td colspan="2" align="center"><input type="submit" value="LogOut" /></td>

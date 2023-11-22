@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,6 +30,10 @@ public class LoginServlet extends HttpServlet{
 			PreparedStatement pst = con.prepareStatement(sql);
 			String username = req.getParameter("UserName");
 			String password = req.getParameter("UserPassword");
+			
+			ServletContext sContext = getServletContext();
+			sContext.setAttribute("username", username);
+			sContext.setAttribute("password", password);
 			
 			pst.setString(1, username);
 			pst.setString(2, password);
@@ -57,5 +61,4 @@ public class LoginServlet extends HttpServlet{
 			}
 		}
 	}
-
 }
