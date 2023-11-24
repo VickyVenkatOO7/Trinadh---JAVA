@@ -31,10 +31,6 @@ public class LoginServlet extends HttpServlet{
 			String username = req.getParameter("UserName");
 			String password = req.getParameter("UserPassword");
 			
-			ServletContext sContext = getServletContext();
-			sContext.setAttribute("username", username);
-			sContext.setAttribute("password", password);
-			
 			pst.setString(1, username);
 			pst.setString(2, password);
 			ResultSet rs = pst.executeQuery();
@@ -42,9 +38,13 @@ public class LoginServlet extends HttpServlet{
 			PrintWriter out = resp.getWriter();
 			
 			if (rs.next()) {
+				int userid = rs.getInt("UserId");
+				ServletContext sContext = getServletContext();
+				sContext.setAttribute("userid", userid);
+				sContext.setAttribute("username", username);
+				
 				HttpSession session = req.getSession();
-				session.setAttribute("username", username);
-				session.setAttribute("password", password);
+				session.setAttribute("userid", userid);
 				resp.sendRedirect("Homepage.html");
 			}
 			else {

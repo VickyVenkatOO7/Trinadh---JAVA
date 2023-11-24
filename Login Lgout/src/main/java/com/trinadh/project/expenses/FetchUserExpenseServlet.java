@@ -27,51 +27,58 @@ public class FetchUserExpenseServlet extends HttpServlet{
 		pw.print("<div>\r\n"
 				+ "			<form action=\"ExpenseInsertionServlet\" method=\"\" >\r\n"
 				+ "				<table>\r\n"
-				+ "<tr>\r\n"
+				+ "					<tr>\r\n"
 				+ "						<td><input type='hidden' name='sessionUserName' value='"+ sessionUserName+"'/></td>\r\n"
 				+ "					</tr>"
 				+ "					<tr>\r\n"
-				+ "						<td>Expense Date:</td>\r\n"
+				+ "						<td>Expense Date :</td>\r\n"
 				+ "						<td><input type=\"date\" name=\"exp_date\"/></td>\r\n"
-				+ "						\r\n"
-				+ "						<td>Expense Category:</td>\r\n"
+				+ "					</tr>"
+				+ "					<tr>\r\n"
+				+ "						<td>Expense Category :</td>\r\n"
 				+ "						<td>\r\n"
 				+ "							<select name=\"exp_category\">\r\n"
 				+ "								<option value=\"1\">Food</option>\r\n"
-				+ "								<option value=\"2\">Cloths</option>\r\n"
-				+ "								<option value=\"3\">House Holds</option>\r\n"
-				+ "								<option value=\"4\">Medicine&Hospital</option>\r\n"
-				+ "								<option value=\"5\">Travel&Fuel</option>\r\n"
+				+ "								<option value=\"2\">Travels & Fuel</option>\r\n"
+				+ "								<option value=\"3\">Households & Grocery</option>\r\n"
+				+ "								<option value=\"4\">Clothes & Accessories</option>\r\n"
+				+ "								<option value=\"5\">Medicine & Hospital</option>\r\n"
+				+ "								<option value=\"6\">Internet & Recharges & Power</option>\r\n"
+				+ "								<option value=\"7\">Education</option>\r\n"
+				+ "								<option value=\"8\">Gifts & Donations</option>\r\n"
+				+ "								<option value=\"9\">Entertainment</option>\r\n"
+				+ "								<option value=\"10\">Loans & Repayments</option>\r\n"
+				+ "								<option value=\"11\">Others</option>\r\n"
 				+ "							</select>\r\n"
 				+ "						</td>\r\n"
-				+ "					</tr>\r\n"
+				+ "					</tr>"
 				+ "					<tr>\r\n"
-				+ "						<td>Expense Details:</td>\r\n"
+				+ "						<td>Expense Details :</td>\r\n"
 				+ "						<td><input type=\"text\" name=\"exp_desc\"/></td>\r\n"
-				+ "						\r\n"
-				+ "						<td>Expense Amount:</td>\r\n"
-				+ "						<td><input type=\"text\" name=\"exp_amount\"/></td>\r\n"
-				+ "					</tr>\r\n"
+				+ "					</tr>"
 				+ "					<tr>\r\n"
-				+ "						<td></td>\r\n"
-				+ "						\r\n"
-				+ "						<td colspan=\"2\" style=\"text-align: center\"><input type=\"submit\" value=\"ADD EXPENSE\"/></td>\r\n"
-				+ "						<td></td>\r\n"
+				+ "						<td>Expense Amount :</td>\r\n"
+				+ "						<td><input type=\"text\" name=\"exp_amount\"/></td>\r\n"
+				+ "					</tr>"
+				+ "					<tr>\r\n"
+				+ "						<td colspan=\"2\" style=\"text-align: center\"><input type=\"submit\" value=\"Add Expense\"/></td>\r\n"
 				+ "					</tr>\r\n"
+				+ "				</form>\r\n"
+				+ "				<form action=\'LogoutServlet'\" method=\"\" >\r\n"
+				+ "					<tr>\r\n"
+				+ "						<td colspan=\"2\" style=\"text-align: center\"><input type=\"submit\" value=\"LogOut\"/></td>\r\n"
+				+ "					</tr>"
+				+ "				</form>\r\n"
 				+ "				</table>\r\n"
-				+ "			</form>\r\n"
 				+ "			\r\n"
 				+ "		</div>");
 		
-			pw.println("<form action='LogoutServlet' >");
-			pw.println("<input type='submit' value='logout'>");
-			pw.println("</form>");
 		
-			String username=(String) req.getSession().getAttribute("username");
+			String username=(String) req.getSession().getAttribute("userid");
 			
 			DBConfiguration DB = new DBConfiguration();
 			Connection con = DB.DBConfig();
-			String sql ="select * from expenses where user_id=? ORDER BY exp_date DESC";
+			String sql ="select * from expenses where UserID=? ORDER BY exp_date DESC";
 			try {
 				PreparedStatement pst = con.prepareStatement(sql);
 				pst.setString(1, username);
