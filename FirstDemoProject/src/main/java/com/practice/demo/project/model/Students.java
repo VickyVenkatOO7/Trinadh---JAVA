@@ -1,6 +1,11 @@
 package com.practice.demo.project.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Students {
+	@Id
 	private int stdId;
 	private String stdName;
 	private String stdTech;
