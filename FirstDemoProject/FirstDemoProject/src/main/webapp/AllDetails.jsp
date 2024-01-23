@@ -18,7 +18,6 @@
 			</tr>
 		</thead>
 		<tbody>
-			<!-- Iterate over the students and display each student in a row -->
 			<c:forEach var="student" items="${students}">
 				<tr>
 					<td>${student.stdId}</td>

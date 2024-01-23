@@ -21,7 +21,7 @@
 			<input type="submit" value="FetchDetailsById"><br>
 		</form>
 		
-		<form action="fetchallStudents">
+		<form action="fetchAllStudents">
 			<input type="submit" value="FetchAllDetails">
 		</form>
 	</div>
