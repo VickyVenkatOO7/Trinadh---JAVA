@@ -5,9 +5,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.practice.demo.project.dao.*;
 import com.practice.demo.project.model.Students;
+
+import jakarta.transaction.Transactional;
 
 @Controller
 public class StudentController {
@@ -34,9 +38,16 @@ public class StudentController {
 		return "Home.jsp";
 	}
 	
+	@DeleteMapping("/Student/{stdId}")
+	public String deleteStd(@PathVariable int stdId) {
+		Students students = repo.getOne(stdId);
+		repo.delete(students);
+		return "Deleted";
+	}
+	
 	@PostMapping("/students")
 	@ResponseBody
-	public Students addStudent(Students students) {
+	public Students addStudent(@RequestBody Students students) {
 		repo.save(students);
 		return students;
 	}
