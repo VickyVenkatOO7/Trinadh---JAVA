@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,20 +39,7 @@ public class StudentController {
 		repo.save(students);
 		return "Home.jsp";
 	}
-	
-	@DeleteMapping("/Student/{stdId}")
-	public String deleteStd(@PathVariable int stdId) {
-		Students students = repo.getOne(stdId);
-		repo.delete(students);
-		return "Deleted";
-	}
-	
-	@PostMapping("/students")
-	@ResponseBody
-	public Students addStudent(@RequestBody Students students) {
-		repo.save(students);
-		return students;
-	}
+	 
 	
 	@GetMapping("/fetchStudentsById")
 	public ModelAndView fetchDetailsById(@RequestParam int stdId) {
@@ -89,4 +78,27 @@ public class StudentController {
 	public Optional<Students> fetchStudent(@PathVariable("stdId") int stdId) {
 		return repo.findById(stdId);
 	}
+	
+	
+	@DeleteMapping("/Student/{stdId}")
+	public ResponseEntity<String> deleteStd(@PathVariable int stdId) {
+		Students students = repo.getOne(stdId);
+		repo.delete(students);
+		return ResponseEntity.ok("Deleted");
+	}
+	
+	@PostMapping("/Students")
+	@ResponseBody
+	public Students addStudent(@RequestBody Students students) {
+		repo.save(students);
+		return students;
+	}
+	
+	@PutMapping("/Student")
+	@ResponseBody
+	public Students addOrUpdateStudent(@RequestBody Students students) {
+		repo.save(students);
+		return students;
+	}
+	
 }
